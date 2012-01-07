@@ -6,6 +6,9 @@ import java.util.ArrayList;
 /**
  *
  * @author mkirschner
+ * 
+ * 
+ * The Grid will setup the Cell Lists and Render the cells to the screen
  */
 public class Grid {
     
@@ -36,10 +39,25 @@ public class Grid {
         
         setNeighbors();
         
-        grid[25][25].node.infectivePop = 0.7;
-        grid[25][25].node.susceptiblePop = 0.3;
+        grid[10][10].node.infectivePop = 1;
+        grid[10][10].node.susceptiblePop = 0;
+        grid[10][10].node.removedPop = 0;
         
-        for (int j=0; j<this.numY; j++) {
+        grid[10][12].node.infectivePop = 0;
+        grid[10][12].node.susceptiblePop = 1;
+        grid[10][12].node.removedPop = 0;
+        
+        grid[10][14].node.infectivePop = 0;
+        grid[10][14].node.susceptiblePop = 0;
+        grid[10][14].node.removedPop = 1;
+        
+        //grid[25][25].node.infectivePop = 0.7;
+        //grid[25][25].node.susceptiblePop = 0.3;
+        
+      //  grid[30][30].node.infectivePop = 1;
+       // grid[][25].node.susceptiblePop = 0;
+        
+   /*     for (int j=0; j<this.numY; j++) {
             grid[43][j].node.susceptiblePop=0.01;
             grid[43][j].node.infectivePop=0.0;
             grid[43][j].node.removedPop=0.99;
@@ -49,7 +67,7 @@ public class Grid {
             grid[15][j].node.susceptiblePop=0.01;
             grid[15][j].node.infectivePop=0.49;
             grid[15][j].node.removedPop=0.5;
-        }
+        } */
      
     }
     
@@ -59,25 +77,6 @@ public class Grid {
                 grid[i][j].render(g);
             }
         }
-    }
-    
-    public void performRule() {
-    //    System.out.println(grid[4][4].node.infectivePop);
-        for (int j=0; j<numY; j++) {
-            for (int i=0; i<numX; i++) {
-                grid[i][j].node.performRule();
-            }
-        }
-        
-        for (int j=0; j<numY; j++) {
-            for (int i=0; i<numX; i++) {
-                grid[i][j].node.swap();
-            }
-        }
-        
-     //   System.out.println("4,4= " + grid[4][4].node.infectivePop);
-        
-       // System.out.println("5,4= "+grid[5][4].node.infectivePop);
     }
     
     public void setNeighbors() {

@@ -23,15 +23,22 @@ public class Node {
     
     public double contactRate;
     public double removalRate;
+    public double remToSucRate;
     
     public Node(int x, int y) {
         //friends = new ArrayList<Node>();
         this.x = x;
         this.y = y;
         
-        contactRate=0.08;
-        removalRate=0.06;
-        susceptiblePop=1;
+        contactRate=Math.random()/10;
+        removalRate=Math.random()/10;
+        
+        System.out.println("Contact Rate=" + contactRate + ", removalRate=" + removalRate);
+        
+        susceptiblePop=Math.random();
+        infectivePop=1-susceptiblePop;
+        
+        remToSucRate=0.04;
     }
      
     public void swap() {
@@ -39,23 +46,7 @@ public class Node {
         susceptiblePop = susceptiblePopTmp;
         removedPop = removedPopTmp;    
     }
-    
-    public void performRule() {     
-            susceptiblePopTmp = susceptiblePop + -1*contactRate*susceptiblePop*infectivePop;
-            
-            for (Node n2 : friends) {
-                susceptiblePopTmp += -1*(contactRate/2)*susceptiblePop*n2.infectivePop;
-            }
-            
-            infectivePopTmp = infectivePop + contactRate*susceptiblePop*infectivePop;
-            for (Node n2 : friends) {
-                infectivePopTmp += (contactRate/2)*susceptiblePop*n2.infectivePop;
-            }     
-            infectivePopTmp += -1*removalRate*infectivePop;   
-            removedPopTmp = removedPop +  removalRate*infectivePop;
-    }
    
-    
     /* Mutators */
     public void setInf(double i) {
         this.infectivePop = i;
