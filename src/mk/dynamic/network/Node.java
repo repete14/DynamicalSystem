@@ -29,8 +29,8 @@ public class Node {
         this.x = x;
         this.y = y;
         
-        contactRate=0.01;
-        removalRate=0.003;
+        contactRate=0.08;
+        removalRate=0.06;
         susceptiblePop=1;
     }
      
@@ -50,13 +50,11 @@ public class Node {
             infectivePopTmp = infectivePop + contactRate*susceptiblePop*infectivePop;
             for (Node n2 : friends) {
                 infectivePopTmp += (contactRate/2)*susceptiblePop*n2.infectivePop;
-            }
-            
-            infectivePopTmp += -1*removalRate*infectivePop;
-            
+            }     
+            infectivePopTmp += -1*removalRate*infectivePop;   
             removedPopTmp = removedPop +  removalRate*infectivePop;
     }
-    
+   
     
     /* Mutators */
     public void setInf(double i) {

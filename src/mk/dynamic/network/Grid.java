@@ -44,6 +44,12 @@ public class Grid {
             grid[43][j].node.infectivePop=0.0;
             grid[43][j].node.removedPop=0.99;
         }
+        
+        for (int j=0; j<this.numY; j++) {
+            grid[15][j].node.susceptiblePop=0.01;
+            grid[15][j].node.infectivePop=0.0;
+            grid[15][j].node.removedPop=0.99;
+        }
        // for (Node n : grid[40][40].node.friends) {
       //      n.susceptiblePop = 1;
        // }
