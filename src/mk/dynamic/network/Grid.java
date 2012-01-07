@@ -47,12 +47,10 @@ public class Grid {
         
         for (int j=0; j<this.numY; j++) {
             grid[15][j].node.susceptiblePop=0.01;
-            grid[15][j].node.infectivePop=0.0;
-            grid[15][j].node.removedPop=0.99;
+            grid[15][j].node.infectivePop=0.49;
+            grid[15][j].node.removedPop=0.5;
         }
-       // for (Node n : grid[40][40].node.friends) {
-      //      n.susceptiblePop = 1;
-       // }
+     
     }
     
     public void render(Graphics g) {
