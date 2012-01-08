@@ -39,6 +39,8 @@ public class DrawingSurface extends JPanel implements ActionListener {
      
     public ArrayList<Rule> ruleList;
     
+    ControlPanel controlPanel;
+    
     public DrawingSurface() {
         setBorder(BorderFactory.createLineBorder(Color.black));
        /* timer = new Timer(delay,this);
@@ -57,6 +59,21 @@ public class DrawingSurface extends JPanel implements ActionListener {
         
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
+                for (int j=0; j<grid.numY; j++) {
+                    for (int i=0; i<grid.numX; i++) {
+                        if (e.getX() > grid.grid[i][j].x && e.getX() < grid.grid[i][j].x + grid.grid[i][j].width &&
+                                e.getY() > grid.grid[i][j].y && e.getY() < grid.grid[i][j].y+grid.grid[i][j].height) {
+                            controlPanel.selectedCell = grid.grid[i][j];
+                            
+                            controlPanel.nodeControlPane.repaint(10,5,100,100);
+                           // controlPanel.nodeControlPane.revalidate();
+                            
+                            System.out.println(controlPanel.nodeControlPane.getSize());
+                            
+                           // System.out.println("ALSKDJALSKDJALSDJLAKSDJ");
+                        }
+                    }
+                }
             }
         });
 
@@ -100,6 +117,7 @@ public class DrawingSurface extends JPanel implements ActionListener {
             rule.performRule();
         }
         repaint();
+        controlPanel.nodeControlPane.repaint();
     }
 }
 

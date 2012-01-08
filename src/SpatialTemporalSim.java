@@ -40,6 +40,7 @@ public class SpatialTemporalSim {
         
         drawingSurface = new DrawingSurface();
         controlPanel = new ControlPanel(drawingSurface);
+        drawingSurface.controlPanel = controlPanel;
         
         System.out.println("Created GUI on EDT? "+
         SwingUtilities.isEventDispatchThread());

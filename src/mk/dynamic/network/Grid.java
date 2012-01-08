@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Grid {
     
-    Cell [][] grid;
+    public Cell [][] grid;
     public int numX;
     public int numY;
     public int size;

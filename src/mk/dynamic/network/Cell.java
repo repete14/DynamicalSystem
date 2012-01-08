@@ -37,5 +37,21 @@ public class Cell {
         g.setColor(Color.BLACK);
         g.drawRect(x, y, width, height);
     }
+        public void render(Graphics g,int x,int y,int width,int height) {
+      //  int red = 255-(int)node.infectivePop*255;
+      //  int green = 255-(int)node.susceptiblePop*255;
+      //  int blue = 255-(int)node.removedPop*255;
+        float red = 1-(float)node.infectivePop;
+        float green = 1-(float)node.susceptiblePop;
+        float blue = 1-(float)node.removedPop;
+        
+        color = new Color(red,green,blue);
+        
+        g.setColor(color);
+        g.fillRect(x, y, width, height);
+        
+        g.setColor(Color.BLACK);
+        g.drawRect(x, y, width, height);
+    }
     
 }

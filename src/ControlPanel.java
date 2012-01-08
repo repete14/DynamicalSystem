@@ -33,6 +33,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 
 /**
  *
@@ -41,9 +42,15 @@ import java.awt.GridBagConstraints;
 public class ControlPanel extends JPanel {
     DrawingSurface drawingSurface;
     JTextField timerDelayField;
+    Cell selectedCell;
     
+    NodeControlPane nodeControlPane;
     public ControlPanel(DrawingSurface drawingSurface) {
         this.drawingSurface = drawingSurface;
+        
+        selectedCell = this.drawingSurface.grid.grid[0][0];
+        
+        //System.out.println(selectedCell.node.contactRate);
         
         this.setLayout(new BorderLayout());
         
@@ -55,6 +62,9 @@ public class ControlPanel extends JPanel {
         JButton timerStopButton = new JButton("Stop");
         timerStopButton.addActionListener(new ButtonTimer());
         timerStopButton.setActionCommand("STOP");
+        
+        
+        
         //this.add(timerStopButton, BorderLayout.SOUTH);
         
         /**********/
@@ -104,9 +114,25 @@ public class ControlPanel extends JPanel {
         resetButton.addActionListener(new ButtonReset());
         textControlsPane.add(resetButton);
         
+        nodeControlPane = new NodeControlPane();
+        nodeControlPane.setBorder(
+                BorderFactory.createCompoundBorder(
+                                BorderFactory.createTitledBorder("Node Control"),
+                                BorderFactory.createEmptyBorder(5,5,5,5)));
+        GridLayout gridLayout = new GridLayout(0,1);
+        nodeControlPane.setLayout(gridLayout);
+        
+        
+        
        this.add(textControlsPane, BorderLayout.PAGE_START);
+       this.add(nodeControlPane, BorderLayout.CENTER);
         
     }
+    
+    public void test() {
+        System.out.println("TEST");
+    }
+    
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(400,400);
@@ -146,6 +172,42 @@ public class ControlPanel extends JPanel {
             drawingSurface.init();
             drawingSurface.repaint();
         }
+    }
+    
+    class NodeControlPane extends JPanel {
+       
+        public void paintComponent(Graphics g) {
+            System.out.println("PAINT COMPONENT");
+            
+            super.paintComponent(g);     
+            
+            System.out.println(this.HEIGHT);
+            selectedCell.render(g,10,5,100,100);
+            
+          //  System.out.println("ASLKJASDLKJASDLKJASDLKJASDLJKASDKJADS");
+            g.drawString("Susceptible: " + Double.toString(selectedCell.node.susceptiblePop), 
+                    120, 20 );
+            g.drawString("Infective: " + Double.toString(selectedCell.node.infectivePop), 
+                    120, 35 );
+            g.drawString("Removed: " + Double.toString(selectedCell.node.removedPop), 
+                    120, 50 );
+            g.drawString("Contact Rate: " + Double.toString(selectedCell.node.contactRate), 
+                    120, 65 );
+            g.drawString("Removal Rate: " + Double.toString(selectedCell.node.removalRate), 
+                    120, 80 );
+            
+            
+        } 
+        public void test() {
+            System.out.println("TEST TEST");
+        }
+        
+        @Override
+            public Dimension getPreferredSize() {
+                 return new Dimension(200,200);
+        }
+
+        
     }
     
 }
