@@ -35,8 +35,10 @@ public class Node {
         
         //System.out.println("Contact Rate=" + contactRate + ", removalRate=" + removalRate);
         
-        susceptiblePop=Math.random();
-        infectivePop=1-susceptiblePop;
+    //    susceptiblePop=Math.random();
+     //   infectivePop=1-susceptiblePop;
+        
+        susceptiblePop = 1;
         
         remToSucRate=Math.random();//0.04;
     }

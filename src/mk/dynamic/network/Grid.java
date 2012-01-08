@@ -45,13 +45,7 @@ public class Grid {
         grid[10][10].node.susceptiblePop = 0;
         grid[10][10].node.removedPop = 0;
         
-        grid[10][12].node.infectivePop = 0;
-        grid[10][12].node.susceptiblePop = 1;
-        grid[10][12].node.removedPop = 0;
-        
-        grid[10][14].node.infectivePop = 0;
-        grid[10][14].node.susceptiblePop = 0;
-        grid[10][14].node.removedPop = 1;
+
         
         //grid[25][25].node.infectivePop = 0.7;
         //grid[25][25].node.susceptiblePop = 0.3;
