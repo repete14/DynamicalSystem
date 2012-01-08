@@ -39,7 +39,8 @@ public class DrawingSurface extends JPanel implements ActionListener {
      
     public ArrayList<Rule> ruleList;
     
-    ControlPanel controlPanel;
+    TestFrame controlPanel;
+    Cell selectedCell;
     
     public DrawingSurface() {
         setBorder(BorderFactory.createLineBorder(Color.black));
@@ -63,12 +64,27 @@ public class DrawingSurface extends JPanel implements ActionListener {
                     for (int i=0; i<grid.numX; i++) {
                         if (e.getX() > grid.grid[i][j].x && e.getX() < grid.grid[i][j].x + grid.grid[i][j].width &&
                                 e.getY() > grid.grid[i][j].y && e.getY() < grid.grid[i][j].y+grid.grid[i][j].height) {
-                            controlPanel.selectedCell = grid.grid[i][j];
+                           
+                            //controlPanel.selectedCell = grid.grid[i][j];
                             
-                            controlPanel.nodeControlPane.repaint(10,5,100,100);
+                            controlPanel.setSelectedCell(grid.grid[i][j]);
+                            
+                            //controlPanel.selectedCellPanel. = grid.grid[i][j];
+                            
+                            selectedCell = grid.grid[i][j];
+                            //System.out.println("Setting selected Cell: " + selectedCell);
+                           // Graphics g = controlPanel.selectedCellPanel.getGraphics();
+                           // selectedCell.render(g);
+                           // controlPanel.selectedCellPanel.repaint();
+                            
+                            
+                            controlPanel.jLabel8.setText(""+selectedCell.node.susceptiblePop);
+                            controlPanel.jLabel9.setText(""+selectedCell.node.infectivePop);
+                            controlPanel.jLabel10.setText(""+selectedCell.node.removedPop);
+                            //controlPanel.nodeControlPane.repaint(10,5,100,100);
                            // controlPanel.nodeControlPane.revalidate();
                             
-                            System.out.println(controlPanel.nodeControlPane.getSize());
+                            //System.out.println(controlPanel.nodeControlPane.getSize());
                             
                            // System.out.println("ALSKDJALSKDJALSDJLAKSDJ");
                         }
@@ -117,7 +133,14 @@ public class DrawingSurface extends JPanel implements ActionListener {
             rule.performRule();
         }
         repaint();
-        controlPanel.nodeControlPane.repaint();
+        Graphics g = this.controlPanel.selectedCellPanel.getGraphics();
+        this.selectedCell.render(g);
+        this.controlPanel.selectedCellPanel.repaint();
+        
+        controlPanel.jLabel8.setText(""+selectedCell.node.susceptiblePop);
+        controlPanel.jLabel9.setText(""+selectedCell.node.infectivePop);
+        controlPanel.jLabel10.setText(""+selectedCell.node.removedPop);
+       // controlPanel.nodeControlPane.repaint();
     }
 }
 

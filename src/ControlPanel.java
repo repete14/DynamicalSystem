@@ -149,7 +149,7 @@ public class ControlPanel extends JPanel {
         public void actionPerformed(ActionEvent ae) {
             if (ae.getActionCommand().equals("START")) {
                 try {
-                drawingSurface.timer.setDelay(Integer.parseInt(timerDelayField.getText()));
+                    drawingSurface.timer.setDelay(Integer.parseInt(timerDelayField.getText()));
                 } catch(Exception e) {
                     System.out.println(e);
                 }

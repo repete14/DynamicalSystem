@@ -25,8 +25,8 @@ import mk.dynamic.network.*;
 public class SpatialTemporalSim {
     
     static DrawingSurface drawingSurface;
-    static ControlPanel controlPanel;
-   
+    //static ControlPanel controlPanel;
+    static TestFrame controlPanel;
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -39,7 +39,11 @@ public class SpatialTemporalSim {
     private static void createAndShowGUI() {
         
         drawingSurface = new DrawingSurface();
-        controlPanel = new ControlPanel(drawingSurface);
+      //  controlPanel = new ControlPanel(drawingSurface);
+       // drawingSurface.controlPanel = controlPanel;
+        
+        controlPanel = new TestFrame(drawingSurface);
+        
         drawingSurface.controlPanel = controlPanel;
         
         System.out.println("Created GUI on EDT? "+
@@ -59,15 +63,20 @@ public class SpatialTemporalSim {
         
         f.setVisible(true);
         
-        JFrame controlPanelFrame = new JFrame("Control Panel");
+        
+        
+      /*  JFrame controlPanelFrame = new JFrame("Control Panel");
         controlPanelFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         controlPanelFrame.add(new ControlPanel(drawingSurface));
         controlPanelFrame.setLocation(f.getLocation().x+f.getWidth(), f.getLocation().y);
         controlPanelFrame.pack();
         
-        controlPanelFrame.setVisible(true);
+        controlPanelFrame.setVisible(true);*/
+        controlPanel.setLocation(f.getLocation().x+f.getWidth(), f.getLocation().y);
         
-        
+        controlPanel.pack();
+        controlPanel.setVisible(true);
+               
         
         
     }
