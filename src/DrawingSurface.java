@@ -81,6 +81,11 @@ public class DrawingSurface extends JPanel implements ActionListener {
                             controlPanel.jLabel8.setText(""+selectedCell.node.susceptiblePop);
                             controlPanel.jLabel9.setText(""+selectedCell.node.infectivePop);
                             controlPanel.jLabel10.setText(""+selectedCell.node.removedPop);
+                            
+                            
+                            controlPanel.jTextField3.setText(""+selectedCell.node.contactRate);
+                            controlPanel.jTextField4.setText(""+selectedCell.node.removalRate);
+                            controlPanel.jTextField5.setText(""+selectedCell.node.remToSucRate);
                             //controlPanel.nodeControlPane.repaint(10,5,100,100);
                            // controlPanel.nodeControlPane.revalidate();
                             
