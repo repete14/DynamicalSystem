@@ -40,7 +40,7 @@ public class Node {
         
         susceptiblePop = 1;
         
-        remToSucRate=Math.random();//0.04;
+       remToSucRate=Math.random();//0.04;
     }
      
     public void swap() {
