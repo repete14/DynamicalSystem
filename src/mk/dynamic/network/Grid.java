@@ -13,12 +13,14 @@ import java.util.ArrayList;
 public class Grid {
     
     Cell [][] grid;
-    int numX;
-    int numY;
+    public int numX;
+    public int numY;
+    public int size;
     
     public Grid(int numX, int numY, int size) {
         this.numX = numX;
         this.numY = numY;
+        this.size = size;
         
         grid = new Cell[numX][numY];
         int x=0; 

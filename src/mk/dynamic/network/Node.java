@@ -38,7 +38,7 @@ public class Node {
         susceptiblePop=Math.random();
         infectivePop=1-susceptiblePop;
         
-        remToSucRate=0.04;
+        remToSucRate=Math.random()/10;//0.04;
     }
      
     public void swap() {

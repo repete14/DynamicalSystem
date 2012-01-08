@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.Timer;
 import java.util.ArrayList;
+import java.awt.Toolkit;
 
 /*import mk.dynamic.network.SIRModel;
 import mk.dynamic.network.SIRModelSwap;
@@ -21,11 +22,11 @@ import mk.dynamic.network.Rule;*/
 
 import mk.dynamic.network.*;
 
-
-
-
 public class SpatialTemporalSim {
-   
+    
+    static DrawingSurface drawingSurface;
+    static ControlPanel controlPanel;
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -35,67 +36,37 @@ public class SpatialTemporalSim {
     }
 
     private static void createAndShowGUI() {
+        
+        drawingSurface = new DrawingSurface();
+        controlPanel = new ControlPanel(drawingSurface);
+        
         System.out.println("Created GUI on EDT? "+
         SwingUtilities.isEventDispatchThread());
-        JFrame f = new JFrame("Swing Paint Demo 2");
+        JFrame f = new JFrame("Graphical Model");
+        // Set Location
+         
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        f.setLocation(dim.width/10,dim.height/10);
+                
+                
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(new DrawingSurface());
+        f.setResizable(false);
+        f.add(drawingSurface);
         f.pack();
+        
         f.setVisible(true);
-    }
-}
-
-class DrawingSurface extends JPanel implements ActionListener {
-
-    Grid grid;
-  
-    Timer timer;
-    
-    ArrayList<Rule> ruleList;
-    
-    public DrawingSurface() {
-        setBorder(BorderFactory.createLineBorder(Color.black));
-        timer = new Timer(5,this);
         
-        ruleList = new ArrayList<Rule>();
-        grid = new Grid(20,20,20);
-        SIRModel sirModel = new SIRModel(grid);
-        SIRSModel sirsModel = new SIRSModel(grid);
-        SIRModelSwap sirModelSwap = new SIRModelSwap(grid);
+        JFrame controlPanelFrame = new JFrame("Control Panel");
+        controlPanelFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        controlPanelFrame.add(new ControlPanel(drawingSurface));
+        controlPanelFrame.setLocation(f.getLocation().x+f.getWidth(), f.getLocation().y);
+        controlPanelFrame.pack();
         
-        //ruleList.add(sirModel);
-        ruleList.add(sirsModel);
-        ruleList.add(sirModelSwap);
+        controlPanelFrame.setVisible(true);
         
-        addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-            }
-        });
-
-        addMouseMotionListener(new MouseAdapter() {
-            public void mouseDragged(MouseEvent e) {  
-            }
-        });
         
-       timer.start();
-    }
-
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(800,600);
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);       
-        grid.render(g);
-    }  
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        for (Rule rule : ruleList) {
-            rule.performRule();
-        }
-        repaint();
+        
+        
     }
 }
