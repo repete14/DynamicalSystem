@@ -32,15 +32,16 @@ import mk.dynamic.network.*;
 
 public class DrawingSurface extends JPanel implements ActionListener {
 
-    Grid grid;
+    public Grid grid;
   
-    Timer timer;
-    
-    ArrayList<Rule> ruleList;
+    public Timer timer;
+    public int delay=10;
+     
+    public ArrayList<Rule> ruleList;
     
     public DrawingSurface() {
         setBorder(BorderFactory.createLineBorder(Color.black));
-        timer = new Timer(1,this);
+       /* timer = new Timer(delay,this);
         
         ruleList = new ArrayList<Rule>();
         grid = new Grid(50,50,10);
@@ -50,7 +51,9 @@ public class DrawingSurface extends JPanel implements ActionListener {
         
         //ruleList.add(sirModel);
         ruleList.add(sirsModel);
-        ruleList.add(sirModelSwap);
+        ruleList.add(sirModelSwap);*/
+        
+        this.init();
         
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -61,8 +64,20 @@ public class DrawingSurface extends JPanel implements ActionListener {
             public void mouseDragged(MouseEvent e) {  
             }
         });
+    }
+    
+    public void init() {
+        timer = new Timer(delay,this);
         
-       timer.start();
+        ruleList = new ArrayList<Rule>();
+        grid = new Grid(50,50,10);
+        SIRModel sirModel = new SIRModel(grid);
+        SIRSModel sirsModel = new SIRSModel(grid);
+        SIRModelSwap sirModelSwap = new SIRModelSwap(grid);
+        
+        //ruleList.add(sirModel);
+        ruleList.add(sirsModel);
+        ruleList.add(sirModelSwap);
     }
 
     @Override
@@ -80,6 +95,7 @@ public class DrawingSurface extends JPanel implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+       // System.out.println("YES");
         for (Rule rule : ruleList) {
             rule.performRule();
         }

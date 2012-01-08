@@ -26,6 +26,7 @@ public class SpatialTemporalSim {
     
     static DrawingSurface drawingSurface;
     static ControlPanel controlPanel;
+   
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
